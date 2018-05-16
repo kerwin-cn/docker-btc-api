@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  btc-api-server:
+    build: ./btc
+#    restart: always
+    ports:
+      - '8332:8332'
+      - '8333:8333'
+    environment:
+      - BTC_RPCUSER=root
+      - BTC_RPCPASSWORD=password
+      - BTC_TXINDEX=1
+      - BTC_RUN_ARGS=-reindex
+
+    volumes:
+      - ./btc/data/:/bitcoin
+    command: "/usr/local/bin/docker_entrypoint.sh"
